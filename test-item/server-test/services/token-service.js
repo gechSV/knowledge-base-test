@@ -1,5 +1,5 @@
 const db = require('../db');
-const Token = db.model('tokens');
+const tokensModel = db.model('tokens');
 const jwt = require('jsonwebtoken');
 
 class TokenService {
@@ -32,18 +32,28 @@ class TokenService {
     }
 
     async saveToken(userId, userEmail, refreshToken){
-        const tokenData = await Token.findOne({where: {"userEmail": userEmail}})
+        const tokenData = await tokensModel.findOne({where: {"userEmail": userEmail}})
 
         if (tokenData){
             tokenData.refreshToken = refreshToken;
-            return await Token.update(
-                {...tokenData},
+            return await tokensModel.update(
+                {userId, userEmail, refreshToken},
                 {where: {'userEmail': userEmail}}
             )
         }
 
-        const token = await Token.create({userId, userEmail, refreshToken});
+        const token = await tokensModel.create({userId, userEmail, refreshToken});
         return token; 
+    }
+
+    async removeToken(refreshToken){
+        const tokenData = await tokensModel.destroy({where: {'refreshToken': refreshToken}});
+        return tokenData;
+    }
+
+    async findToken(refreshToken){
+        const tokenData = await tokensModel.findOne({where: {'refreshToken': refreshToken}});
+        return tokenData;
     }
 }
 
