@@ -24,7 +24,7 @@ app.use(errorMiddleware); // должна быть последней в цеп�
 const start = async () => {
     try{
         await db.authenticate();
-        await db.sync({force: true});
+        await db.sync();
         app.listen(PORT, () => console.log(`Server started on: http://localhost:${PORT}`)) 
     }
     catch(e){
