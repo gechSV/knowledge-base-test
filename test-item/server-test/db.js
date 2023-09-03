@@ -7,7 +7,7 @@ const sequelize = new Sequelize({
     password: 'sadamit2242',
     host: 'localhost', 
     dialect: 'postgres',
-    // logging: false
+    logging: false
 })
 
 const modelDefiners = [

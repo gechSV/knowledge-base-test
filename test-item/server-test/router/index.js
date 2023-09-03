@@ -3,6 +3,6 @@ const userController = require('../controllers/user-controller');
 const router = new Router();
 const {body} = require('express-validator');
 
-router.get('/inf', userController.getInf);
+router.post('/registration', userController.registration);
 
 module.exports = router;
