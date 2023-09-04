@@ -1,5 +1,7 @@
 const db = require('../db');
 const usersModel = db.model('users');
+const roleModel = db.model('roles');
+const userRolesModel = db.model('userRoles');
 const bcrypt = require('bcrypt');
 const ApiError = require('../exceptions/api-error');
 const UserDto = require('../dtos/user-dto');
@@ -73,6 +75,43 @@ class UserService{
         return {...tokens, userDto};
     }
 
+    async addUserRole(userEmail, role){
+        const userData = await usersModel.findOne({where: {'email': userEmail}});
+        if(!userData){
+            throw ApiError.BadRequest(`Пользователь с почтовым адресом ${userEmail} не найден.`)
+        }
+
+        const rolesData = await userRolesModel.findAll({where: {'userEmail': userEmail}});
+        let isReadiRole = false;
+        rolesData.forEach((roleData) => {
+            if(role === roleData.roleValue){
+                isReadiRole = true;
+            }
+        })
+
+        if(isReadiRole){
+            throw ApiError.BadRequest(`Пользователь уже имеет роль: ${role}`)
+        }
+
+        const roleData = await roleModel.findOne({where: {'value': role}})
+        if(!roleData){
+            throw ApiError.BadRequest(`Роль ${role} не существует.`)
+        }
+
+        const newUserRole = await userRolesModel.create(
+            {'userId': userData.id, 'userEmail': userData.email, 'roleValue': roleData.value})
+        
+        return newUserRole;
+    }
+
+    async getUsers(){
+        const users = await usersModel.findAll();
+        const userDto = []
+        users.forEach((user) => {
+            userDto.push(new UserDto(user))
+        })
+        return userDto;  
+    }
 }
 
 module.exports = new UserService();

@@ -59,6 +59,26 @@ class UserController{
         }
     }
 
+    async addUserRole(req, res, next){
+        try {
+            const {userEmail, role} = req.body;
+            const newUserRole = await userService.addUserRole(userEmail, role);
+            return res.json({newUserRole});
+
+        } catch (e) {
+            next(e);
+        }
+    }
+
+    async getUsers(req, res, next){
+        try {
+            const users = await userService.getUsers();
+            return res.json({...users})
+        } catch (e) {
+            next(e);
+        }
+    }
+
 }
 
 module.exports = new UserController();

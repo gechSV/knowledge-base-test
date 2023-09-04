@@ -2,10 +2,11 @@ const {Sequelize} = require('sequelize');
 const {applyExtraSetup} = require('./models/extra-setup');
 
 const sequelize = new Sequelize({
-    database: 'knowledge_base_db',
-    username: 'postgres',
-    password: 'sadamit2242',
-    host: 'localhost', 
+    database: process.env.DB_NAME,
+    username: process.env.DB_USER_NAME,
+    password: process.env.DB_PASSWORD,
+    host: process.env.DB_HOST, 
+    port: process.env.DB_PORT,
     dialect: 'postgres',
     logging: false
 })
