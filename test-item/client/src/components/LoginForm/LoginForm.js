@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState} from 'react';
+import React, { useContext, useEffect, useState} from 'react';
 import { Context } from '../../index';
 import './style.css'
 import { observer } from 'mobx-react-lite';
@@ -36,7 +36,7 @@ export const LoginForm = () => {
 
             <button className='login-button' onClick = {() => store.login(email, password)}>Вход</button>
 
-            <p className='error-lable'>{ store.authStatusError ? `1` : `2` }</p> 
+            <p className='error-lable'>{ store.authStatusError === 401 ? `1` : `2` }</p> 
         </div>
     </section>
   );

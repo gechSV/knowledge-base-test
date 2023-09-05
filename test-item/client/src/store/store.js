@@ -47,7 +47,7 @@ export default class Store{
             this.setAuthStatusError(null);
         } catch (err) {
             this.setAuthStatusError(err.response.status);
-            console.log("authErr: ", err.message);
+            console.log("authErr: ", err.response.status);
         }
     }
 
@@ -90,9 +90,9 @@ export default class Store{
         try {
             const response = await axios.get(`${API_URL}/refresh`, {withCredentials: true})
             console.log(response);
-            localStorage.setItem('token', response.data.accesToken);
+            localStorage.setItem('token', response.data.accessToken);
             this.setAuth(true);
-            this.setUser(response.data.user);
+            this.setUser(response.data);
         } catch (err) {
             if(err instanceof Error){
                 console.log(err.message);
