@@ -1,0 +1,90 @@
+.login-form{
+    display: flex;
+    flex-direction: column;
+    gap: 10px
+}
+
+.input-container {
+  height: 50px;
+  position: relative;
+  width: 100%;
+}
+
+.input {
+  background-color: #EEEEEE;
+  border-radius: 12px;
+  border: 0;
+  box-sizing: border-box;
+  color: #191919;
+  font-size: 18px;
+  height: 100%;
+  outline: 0;
+  padding: 4px 20px 0;
+  width: 100%;
+}
+
+.cut {
+  background-color: #fafafa;
+  border-radius: 10px;
+  height: 20px;
+  left: 20px;
+  position: absolute;
+  top: -20px;
+  transform: translateY(0);
+  transition: transform 200ms;
+  width: 123px;
+}
+
+.input:focus ~ .cut,
+.input:not(:placeholder-shown) ~ .cut {
+  transform: translateY(8px);
+}
+
+.placeholder {
+  color: #9E9E9E;
+  font-family: sans-serif;
+  left: 20px;
+  line-height: 14px;
+  pointer-events: none;
+  position: absolute;
+  transform-origin: 0 50%;
+  transition: transform 200ms, color 200ms;
+  top: 20px;
+}
+
+.input:focus ~ .placeholder,
+.input:not(:placeholder-shown) ~ .placeholder {
+  transform: translateY(-30px) translateX(10px) scale(0.75);
+}
+
+.input:not(:placeholder-shown) ~ .placeholder {
+  color: #191919;
+}
+
+.input:focus ~ .placeholder {
+  color: #191919;
+}
+
+.login-button{
+    width: 100%;
+    height: 50px;
+    border-radius: 12px;
+    border: none;
+    margin-top: 20px;
+    font-size: 18px;
+    background: #FF5722;
+    color: #FAFAFA;
+    transition: 0.3s;
+}
+
+
+.login-button:active{
+    background: #EEEEEE;
+    color: #191919;
+}
+
+.error-lable{
+    width: auto;
+    height: 15px;
+    color: #191919;
+}

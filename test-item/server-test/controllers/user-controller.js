@@ -28,8 +28,8 @@ class UserController{
 
             res.cookie('refreshToken', userData.refreshToken, 
                 {maxAge: 10 * 24 * 60 * 60 * 1000, httpOnly: true});
-
-            return res.status(200).json(userData);
+            console.log("userData: ", userData);
+            return res.status(200).json({...userData});
         } catch (e) {
             next(e);
         }

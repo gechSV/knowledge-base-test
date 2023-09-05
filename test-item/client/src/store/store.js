@@ -4,9 +4,10 @@ import axios from "axios";
 import {API_URL} from '../http'
 
 export default class Store{
-    user = {};
+    user;
     isAuth = false;
     isLoading = false; 
+    authStatusError = null;
 
     constructor(){ 
         makeAutoObservable(this);
@@ -16,34 +17,37 @@ export default class Store{
         this.isAuth = bool;
     }
 
-    setUser(user){
-        this.user = user; 
-        // console.log('setUser' , JSON.stringify(user))
+    setAuthStatusError(err){
+        this.authStatusError = err;
     }
 
+    setUser(user){
+        this.user = {
+            id: user.id,
+            email: user.email, 
+            firstname: user.firstname,
+            lastname: user.lastname,
+            patronymic: user.patronymic, 
+        }
+    }
 
     setLoading(bool){
         this.isLoading = bool;
     }
 
-
     async login(email, password){
         try {
-            // console.log("Store.ts login: ", email, password)
+            console.log("Store.js login: ", email, password)
             const response = await AuthService.login(email, password);
-            // console.log('store registration' + JSON.stringify(response.data));
-            localStorage.setItem('token', response.data.accesToken);
+            console.log("response.data: ", response.data);
+            localStorage.setItem('token', response.data.accessToken);
             this.setAuth(true);
-            console.log("response.data.user " + response.data.user.email)
-            this.setUser(response.data.user);
-            console.log('login', response, 'user' ,this.user.email)
+            this.setUser(response.data);
+            console.log(`Пользователь ${this.user.email} авторизован.`)
+            this.setAuthStatusError(null);
         } catch (err) {
-            if(err instanceof Error){
-                console.log(err.message);
-            }
-            else{
-                console.log('Unexpected error', err);
-            }
+            this.setAuthStatusError(err.response.status);
+            console.log("authErr: ", err.message);
         }
     }
 

@@ -1,6 +1,27 @@
+import { useContext, useEffect} from 'react';
 import './App.css';
+import { Context } from './index';
+import { LoginForm } from './components/LoginForm/LoginForm';
+import { observer } from 'mobx-react-lite';
 
-function App() {
+export const App = () => {
+  const {store} = useContext(Context);
+
+  useEffect(() => {
+    if (localStorage.getItem('token')) {
+        store.checkAuth();
+    }
+  }, [store])
+
+  if(!store.isAuth){
+    return(
+    <div className="App">
+      <header className="App-header">
+        <LoginForm/>
+      </header>
+    </div>)
+  }
+
   return (
     <div className="App">
       <header className="App-header">
@@ -9,5 +30,6 @@ function App() {
     </div>
   );
 }
+  
 
-export default App;
+export default observer(App);
