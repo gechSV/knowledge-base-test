@@ -88,3 +88,9 @@
     height: 15px;
     color: #191919;
 }
+
+.error-lable{
+  color: red;
+  font-size: 14px;
+  font-family: sans-serif;
+}

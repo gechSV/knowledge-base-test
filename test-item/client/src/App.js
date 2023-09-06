@@ -1,10 +1,10 @@
 import React, { useContext, useEffect} from 'react';
 import './App.css';
 import { Context } from './index';
-import { LoginForm } from './components/LoginForm/LoginForm';
+import LoginForm from './components/LoginForm/LoginForm';
 import { observer } from 'mobx-react-lite';
 
-export const App = () => {
+function App(){
   const {store} = useContext(Context);
 
   useEffect(() => {

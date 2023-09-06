@@ -4,14 +4,15 @@ import axios from "axios";
 import {API_URL} from '../http'
 
 export default class Store{
-    user;
-    isAuth = false;
-    isLoading = false; 
-    authStatusError = null;
-
+    
     constructor(){ 
         makeAutoObservable(this);
     }
+
+    user;
+    isAuth = false;
+    isLoading = false; 
+    authStatusError = '2';
 
     setAuth(bool){
         this.isAuth = bool;
@@ -57,7 +58,7 @@ export default class Store{
             console.log('store registration' + response.data);
             localStorage.setItem('token', response.data.accesToken);
             this.setAuth(true);
-            this.setUser(response.data.user);
+            this.setUser(response.data);
         } catch (error) {
             if (error instanceof Error){
                 console.log(error.message);
@@ -93,7 +94,9 @@ export default class Store{
             localStorage.setItem('token', response.data.accessToken);
             this.setAuth(true);
             this.setUser(response.data);
+            this.setAuthStatusError(null);
         } catch (err) {
+            this.setAuthStatusError(null);
             if(err instanceof Error){
                 console.log(err.message);
             }
