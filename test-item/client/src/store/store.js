@@ -2,6 +2,7 @@ import {makeAutoObservable} from 'mobx';
 import AuthService from "../services/AuthService";
 import axios from "axios";
 import {API_URL} from '../http'
+import {IUser} from '../models/IUser'
 
 export default class Store{
     
@@ -9,7 +10,7 @@ export default class Store{
         makeAutoObservable(this);
     }
 
-    user;
+    user = IUser;
     isAuth = false;
     isLoading = false; 
     authStatusError = '2';
@@ -23,13 +24,11 @@ export default class Store{
     }
 
     setUser(user){
-        this.user = {
-            id: user.id,
-            email: user.email, 
-            firstname: user.firstname,
-            lastname: user.lastname,
-            patronymic: user.patronymic, 
-        }
+        this.user = new IUser(user)
+    }
+
+    getUser(){
+        return this.user;
     }
 
     setLoading(bool){
@@ -38,17 +37,26 @@ export default class Store{
 
     async login(email, password){
         try {
+            if(!email || !password || (email.length === 0) || (password.length === 0)){
+                
+                throw(new Error('Поля не могут быть пустыми'))
+            }
             console.log("Store.js login: ", email, password)
             const response = await AuthService.login(email, password);
             console.log("response.data: ", response.data);
             localStorage.setItem('token', response.data.accessToken);
             this.setAuth(true);
-            this.setUser(response.data);
+            this.setUser(response.data.userDto);
             console.log(`Пользователь ${this.user.email} авторизован.`)
-            this.setAuthStatusError(null);
         } catch (err) {
-            this.setAuthStatusError(err.response.status);
-            console.log("authErr: ", err.response.status);
+            if(Object.hasOwn(err, '.response.status')){
+                this.setAuthStatusError(err.response.status);
+                console.log("authErr: ", err.response.status);
+            }else{
+                this.setAuthStatusError(401);
+                console.log(err.message)
+            }
+            
         }
     }
 
@@ -58,14 +66,9 @@ export default class Store{
             console.log('store registration' + response.data);
             localStorage.setItem('token', response.data.accesToken);
             this.setAuth(true);
-            this.setUser(response.data);
+            this.setUser(response.data.userDto);
         } catch (error) {
-            if (error instanceof Error){
-                console.log(error.message);
-            }
-            else{
-                console.log('Unexcepted error', error);
-            }
+            console.log(error.message);
         }
     }
 
@@ -77,12 +80,7 @@ export default class Store{
             this.setAuth(false);
             this.setUser({});
         } catch (error) {
-            if (error instanceof Error){
-                console.log(error.message);
-            }
-            else{
-                console.log('Unexcepted error', error);
-            }
+            console.log(error.message);
         }
     }
 
@@ -93,16 +91,12 @@ export default class Store{
             console.log(response);
             localStorage.setItem('token', response.data.accessToken);
             this.setAuth(true);
-            this.setUser(response.data);
+            this.setUser(response.data.userDto);
+            console.log('user', this.user)
             this.setAuthStatusError(null);
         } catch (err) {
             this.setAuthStatusError(null);
-            if(err instanceof Error){
-                console.log(err.message);
-            }
-            else{
-                console.log('Unexcepted error', err);
-            }
+            console.log(err.message);
         }finally{
             this.setLoading(false);
         }

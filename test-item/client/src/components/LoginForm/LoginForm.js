@@ -13,7 +13,16 @@ function LoginForm(){
   const [password, setPassword] = useState();
   // const [authErrMes, setAuthErrMes] = useState();
 
-  console.log('12321312321312')
+  function getErrorString(){
+    if(store.authStatusError === (401)){
+      return "Неправилиный логин или пароль";
+    }
+    if(!store.authStatusError){
+      return 
+    }
+    return null;
+  }
+
   return (
     <section className="login-section">
         <div className='login-form'>
@@ -37,7 +46,7 @@ function LoginForm(){
 
             <button className='login-button' onClick = {() => store.login(email, password)}>Вход</button>
 
-            <p className='error-lable'>{store.authStatusError === 401? 'Неправилиный логин или пароль' : ''}</p> 
+            <p className='error-lable'>{getErrorString()}</p> 
         </div>
     </section>
   );

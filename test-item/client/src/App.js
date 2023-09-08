@@ -3,6 +3,7 @@ import './App.css';
 import { Context } from './index';
 import LoginForm from './components/LoginForm/LoginForm';
 import { observer } from 'mobx-react-lite';
+import NavigationBar from './components/NavigationBar/NavigationBar';
 
 function App(){
   const {store} = useContext(Context);
@@ -24,9 +25,7 @@ function App(){
 
   return (
     <div className="App">
-      <header className="App-header">
-        
-      </header>
+      <NavigationBar/>
     </div>
   );
 }

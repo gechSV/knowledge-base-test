@@ -6,6 +6,7 @@ const bcrypt = require('bcrypt');
 const ApiError = require('../exceptions/api-error');
 const UserDto = require('../dtos/user-dto');
 const tokenService = require('./token-service');
+const roleService = require('./role-service');
 
 class UserService{
 
@@ -45,7 +46,10 @@ class UserService{
         const tokens = tokenService.generateTokens({...userDto});
 
         await tokenService.saveToken(userDto.id, userDto.email, tokens.refreshToken);
-        return{...tokens, ...userDto}
+        
+        const userRoles = await roleService.getUserRoles(userDto.id);
+
+        return{...tokens, ...userDto, userRoles}
     }
 
     async logout(refreshToken){

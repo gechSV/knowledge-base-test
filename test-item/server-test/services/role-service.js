@@ -20,8 +20,12 @@ class RolesService{
     }
 
     async getUserRoles(userId){
-        const userRoles = await userRolesModel.findAll({where: {'userId': userId}})
-        return userRoles;
+        const userRoles = await userRolesModel.findAll({where: {'userId': userId}, attributes: ['roleValue']})
+        const cleanRoles = []
+        userRoles.forEach(role => {
+            cleanRoles.push(role.roleValue);
+        })
+        return cleanRoles;
     }
 }
 
