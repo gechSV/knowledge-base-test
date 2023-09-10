@@ -38,16 +38,15 @@ export default class Store{
     async login(email, password){
         try {
             if(!email || !password || (email.length === 0) || (password.length === 0)){
-                
                 throw(new Error('Поля не могут быть пустыми'))
             }
-            console.log("Store.js login: ", email, password)
             const response = await AuthService.login(email, password);
             console.log("response.data: ", response.data);
             localStorage.setItem('token', response.data.accessToken);
             this.setAuth(true);
-            this.setUser(response.data.userDto);
+            this.setUser(response.data);
             console.log(`Пользователь ${this.user.email} авторизован.`)
+            this.setAuthStatusError(null);
         } catch (err) {
             if(Object.hasOwn(err, '.response.status')){
                 this.setAuthStatusError(err.response.status);
@@ -91,7 +90,7 @@ export default class Store{
             console.log(response);
             localStorage.setItem('token', response.data.accessToken);
             this.setAuth(true);
-            this.setUser(response.data.userDto);
+            this.setUser(response.data);
             console.log('user', this.user)
             this.setAuthStatusError(null);
         } catch (err) {

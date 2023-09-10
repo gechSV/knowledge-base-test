@@ -10,8 +10,6 @@ function NavigationBar(){
     useEffect(() => {
     }, [store])
 
-        console.log(store.user)
-
     return(
         <section className='navbar-section'>
             <Header/>

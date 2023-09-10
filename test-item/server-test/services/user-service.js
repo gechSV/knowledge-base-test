@@ -76,7 +76,7 @@ class UserService{
         const tokens = tokenService.generateTokens({...userDto});
 
         await tokenService.saveToken(userDto.id, userDto.email, tokens.refreshToken);
-        return {...tokens, userDto};
+        return {...tokens, ...userDto};
     }
 
     async addUserRole(userEmail, role){

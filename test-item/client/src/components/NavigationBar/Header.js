@@ -15,6 +15,7 @@ function Header(){
                 <div>Вошли как</div>
                 <a href="#">{`${store.user.email}`}</a>
             </div>
+            <button className='exit-button' onClick={() => store.logout()}>Выход</button>
         </section>
     )
 }
