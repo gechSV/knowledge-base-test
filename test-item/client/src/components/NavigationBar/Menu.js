@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState} from 'react';
 import { Context } from '../../index';
-import './style.css'
 import { observer } from 'mobx-react-lite';
+import AdminSubMenu from './AdminSubMenu'
 
 function Menu(){
     const {store} = useContext(Context);
@@ -9,27 +9,22 @@ function Menu(){
     useEffect(() => {
     }, [store])
 
-    
+    const [isOpenAdmineSubMenu, setIsOpenAdmineSubMenu] = useState();
+
     function menuItemsForAdmin(){
-        if(store.isAuth){
+        if(store.roleComplianceCheck(['ADMIN'])){
             return(
                 <div>
-                    <button className='menu-button'>Админ</button>
+                    <button className='menu-button'
+                        onClick={() => adminSubmenuButtons()}>Admin</button>
                 </div>  
             )
         }
         return null;
     }
 
-    function submenuButtons(){
-        return(
-            <div>
-                <button>Нажми</button>
-                <button>Нажми</button>
-                <button>Нажми</button>
-                <button>Нажми</button>
-            </div>
-        )
+    function adminSubmenuButtons(flag){
+        setIsOpenAdmineSubMenu(!isOpenAdmineSubMenu)
     }
 
     return(
@@ -39,9 +34,7 @@ function Menu(){
                 <button className='menu-button'>Test</button>
                 {menuItemsForAdmin()}
             </div>
-            <div className='submenu'>
-                {submenuButtons()}
-            </div>
+            {isOpenAdmineSubMenu ? <AdminSubMenu/> : null}
         </section>
 
     )

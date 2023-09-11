@@ -45,7 +45,8 @@ export default class Store{
             localStorage.setItem('token', response.data.accessToken);
             this.setAuth(true);
             this.setUser(response.data);
-            console.log(`Пользователь ${this.user.email} авторизован.`)
+            console.log(`Пользователь ${this.user.email} авторизован.`);
+            // console.log(this.user)
             this.setAuthStatusError(null);
         } catch (err) {
             if(Object.hasOwn(err, '.response.status')){
@@ -100,5 +101,21 @@ export default class Store{
             this.setLoading(false);
         }
     }
+
+    roleComplianceCheck(acceptRoles){
+        try {
+            let hasRole = false;
+             this.user.roles.forEach(role => {
+                if(acceptRoles.includes(role)){
+                    hasRole = true;
+                }
+            })
+            console.log('hasRole: ', hasRole);
+            return hasRole; 
+        } catch (error) {
+            console.log(error.message)
+        }
+    }
+
 
 }
