@@ -4,6 +4,7 @@ import { Context } from './index';
 import LoginForm from './components/LoginForm/LoginForm';
 import { observer } from 'mobx-react-lite';
 import NavigationBar from './components/NavigationBar/NavigationBar';
+import ContentContainer from './components/Content/ContentContainer';
 
 function App(){
   const {store} = useContext(Context);
@@ -26,6 +27,7 @@ function App(){
   return (
     <div className="App">
       <NavigationBar/>
+      <ContentContainer/>
     </div>
   );
 }
