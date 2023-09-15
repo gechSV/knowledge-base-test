@@ -4,7 +4,7 @@ import { Context } from './index';
 import LoginForm from './components/LoginForm/LoginForm';
 import { observer } from 'mobx-react-lite';
 import NavigationBar from './components/NavigationBar/NavigationBar';
-import ContentContainer from './components/Content/ContentContainer';
+import ContentContainer from './components/ContentContainer/ContentContainer';
 
 function App(){
   const {store} = useContext(Context);

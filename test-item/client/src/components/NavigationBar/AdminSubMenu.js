@@ -2,7 +2,7 @@ import React, { useContext, useEffect} from 'react';
 import { Context } from '../../index';
 import { observer } from 'mobx-react-lite';
 
-function AdminSubMenu(){
+function AdminSubMenu(props){
     const {store} = useContext(Context);
 
     useEffect(() => {

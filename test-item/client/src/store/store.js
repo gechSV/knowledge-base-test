@@ -110,7 +110,7 @@ export default class Store{
                     hasRole = true;
                 }
             })
-            console.log('hasRole: ', hasRole);
+            // console.log(`hasRole${acceptRoles}: `, hasRole);
             return hasRole; 
         } catch (error) {
             console.log(error.message)

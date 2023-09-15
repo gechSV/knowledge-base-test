@@ -10,8 +10,8 @@ function Menu(){
     useEffect(() => {
     }, [store])
 
-    const [isOpenAdmineSubMenu, setIsOpenAdmineSubMenu] = useState();
-    const [isOpenEditorSubMenu, setIsOpenEditorSubMenu] = useState();
+    const [isOpenAdmineSubMenu, setIsOpenAdmineSubMenu] = useState(false);
+    const [isOpenEditorSubMenu, setIsOpenEditorSubMenu] = useState(false);
 
     function menuItemsForAdmin(){
         if(store.roleComplianceCheck(['ADMIN'])){
@@ -47,6 +47,7 @@ function Menu(){
         setIsOpenEditorSubMenu(!isOpenEditorSubMenu);
     }
 
+
     function turnOffAllSwitch(){
         setIsOpenAdmineSubMenu(false);
         setIsOpenEditorSubMenu(false);
@@ -60,8 +61,8 @@ function Menu(){
                 {menuItemsForAdmin()}
             </div>
 
-            {isOpenAdmineSubMenu ? <AdminSubMenu/> : null}
-            {isOpenEditorSubMenu ? <EditorSubMenu/> : null}
+            {isOpenAdmineSubMenu ? <AdminSubMenu cloceSubMenu = {setIsOpenAdmineSubMenu}/> : null}
+            {isOpenEditorSubMenu ? <EditorSubMenu cloceSubMenu = {setIsOpenEditorSubMenu} /> : null}
         </section>
 
     )

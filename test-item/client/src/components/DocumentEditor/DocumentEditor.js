@@ -1,6 +1,7 @@
 import React, { useContext, useEffect} from 'react';
 import { Context } from '../../index';
 import { observer } from 'mobx-react-lite';
+import './style-document-editor.css'
 
 function DocumentEditor(){
     const {store} = useContext(Context);
@@ -9,7 +10,12 @@ function DocumentEditor(){
     }, [store])
 
     return(
-        <div> DocumentEditor </div>
+        <div className='document-editor-container'> 
+            <div className='toolbar'>
+                toolbar
+            </div>
+            
+        </div>
     )
 }
 
