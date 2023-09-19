@@ -14,7 +14,9 @@ function DocumentEditor(){
             <div className='toolbar'>
                 toolbar
             </div>
-            
+            <div className='workContainer'>
+                work container
+            </div>
         </div>
     )
 }
