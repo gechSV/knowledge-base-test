@@ -16,6 +16,7 @@ const modelDefiners = [
     require('./models/roles-model'),
     require('./models/token-model'),
     require('./models/user-roles-model'),
+    require('./models/document')
 ]
 
 for(const modelDefiner of modelDefiners){
