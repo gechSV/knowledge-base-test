@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import Store from "./store/store"
 import NavigationStore from './store/navigation-store';
+import TextEditorStore from './store/text-editor-store';
 
 import './fonts/Roboto/static/RobotoMono-Light.ttf'
 import './fonts/Roboto/static/RobotoMono-Bold.ttf'
@@ -13,14 +14,15 @@ import './fonts/Roboto/static/RobotoMono-Regular.ttf'
 
 export const store = new Store();
 export const navigationStore = new NavigationStore();
+export const textEditorStore = new TextEditorStore();
 
 export const Context = createContext({
-    store, navigationStore
+    store, navigationStore, textEditorStore
 })
 
 ReactDOM.render(
     <Context.Provider value={{
-        store, navigationStore
+        store, navigationStore, textEditorStore
     }}>
         <App />
     </Context.Provider>,
