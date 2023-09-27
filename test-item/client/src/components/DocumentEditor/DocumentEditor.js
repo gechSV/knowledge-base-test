@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState, useRef} from 'react';
 import { Context } from '../../index';
 import { observer } from 'mobx-react-lite';
 import './style-document-editor.css'
-import { DocumentSections } from '../../models/DocumentSections/DocumentSections';
+import { Document } from '../../models/DocumentSections/Document';
 import TextSection from './TextSection';
 import 'draft-js/dist/Draft.css';
 import {Editor, EditorState, RichUtils} from 'draft-js';
@@ -13,33 +13,17 @@ function DocumentEditor(){
     const {store} = useContext(Context);
     const {textEditorStore} = useContext(Context);
 
-    const [documentSections, setDocumentSections] = useState(new DocumentSections())  
-    let editorStates;
+    const [documentSections, setDocumentSections] = useState(() => (new Document()));
 
     useEffect(() => {
+
     }, [store, documentSections])
 
-    const edState = [];
     // const documentSections = new DocumentSections();
     function addTextSection(){
-        let newDoc = new DocumentSections(documentSections.sections);
-        newDoc.newSection({type: 'TextSection', data: ''});
+        let newDoc = new Document(documentSections.sections);
+        newDoc.newSection({type: 'TextSection', data: '', key: documentSections.lenth + 1});
         setDocumentSections(newDoc);
-        console.log();
-    }
-
-
-    function handleKeyCommand(command, editorState) {
-        console.log(command)
-        const newState = RichUtils.handleKeyCommand(editorState, command);
-     
-     
-        if (newState) {
-          this.onChange(newState);
-          return 'handled';
-        }
-     
-        return 'not-handled';
     }
 
     return(
@@ -47,20 +31,15 @@ function DocumentEditor(){
             <div className='toolbar'>
                 <button
                     className='toolbar-button'
-                    onClick={addTextSection}
+                    onClick={() => addTextSection()}
                     >
                          Добавить секцию 
                 </button>
-
-                <button>
-                    bold
-                </button>
-            
             </div>
             <div className='workContainer'>
-                {documentSections.sections.map(el => (
+                {documentSections.sections.map((el, i) => (
                     <TextSection 
-                        handleKeyCommand = {handleKeyCommand}/>
+                        key={i}/>
                 ))}
             </div>
         </div>

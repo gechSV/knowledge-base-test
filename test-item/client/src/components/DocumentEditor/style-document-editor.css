@@ -2,7 +2,7 @@
     position: relative;
     width: 100%;
     height: auto;
-    background: rebeccapurple;
+    background: #999999;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -31,16 +31,17 @@
 
 
 .text-section{
+    border-radius: 10px;
+    padding: 10px;
     width: 100%;
     height: 200px;
-    background: #123456;
+    background: #fafafa;
     margin: 10px 0;
 }
 
 .text-section-textarea{
     width: 100%;
     height: 100%;
-    color: #fafaff;
     background-color: #123456;
     font-size: 24px;
 }

@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import Store from "./store/store"
 import NavigationStore from './store/navigation-store';
-import TextEditorStore from './store/text-editor-store';
+import TextEditorStore from './components/DocumentEditor/text-editor-logic';
 
 import './fonts/Roboto/static/RobotoMono-Light.ttf'
 import './fonts/Roboto/static/RobotoMono-Bold.ttf'
