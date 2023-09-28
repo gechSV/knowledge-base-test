@@ -17,6 +17,7 @@
     background: gray;
     display: flex;
     justify-content: flex-start;
+    text-align: center;
 }
 
 .workContainer{
@@ -35,6 +36,7 @@
     padding: 10px;
     width: 100%;
     height: 200px;
+    height: auto;
     background: #fafafa;
     margin: 10px 0;
 }
@@ -44,4 +46,18 @@
     height: 100%;
     background-color: #123456;
     font-size: 24px;
+
+}
+
+.MyCustomBlock{
+    position: relative;
+    background-color: green;
+    display: block;
+    padding: 0 20%;
+}
+
+div.DraftEditor-root{
+    border: 1px solid #000;
+    height: auto;
+    overflow-y: auto;
 }

@@ -1,5 +1,6 @@
 import Immutable from "immutable";
 import { DraftEditorCommand, DefaultDraftBlockRenderMap } from "draft-js";
+import React from "react";
 
 export const EntityType = {
   link: "link",
@@ -18,6 +19,7 @@ export const BlockType = {
   orderList : "ordered-list-item",
   cite : "cite",
   default : "unstyled",
+  alignCenter : "alignCenter"
 }
 
 export const InlineStyle = {
@@ -25,33 +27,25 @@ export const InlineStyle = {
   ITALIC : "ITALIC",
   UNDERLINE : "UNDERLINE",
   ACCENT : "ACCENT",
+  LEFT : "LEFT",
+  CENTER : "CENTER",
+  RIGHT: "RIGHT"
 }
 
-export const BLOCK_LABELS = {
-  [BlockType.h1]: "Заголовок 1",
-  [BlockType.h2]: "Заголовок 2",
-  [BlockType.h3]: "Заголовок 3",
-  [BlockType.h4]: "Заголовок 4",
-  [BlockType.h5]: "Заголовок 5",
-  [BlockType.h6]: "Заголовок 6",
-  [BlockType.blockquote]: "Цитата",
-  [BlockType.code]: "Блок с кодом",
-  [BlockType.list]: "Маркированный список",
-  [BlockType.orderList]: "Нумерованный список",
-  [BlockType.cite]: "Сноска",
-  [BlockType.default]: "Обычный текст",
-};
-
 export const alignStyleMap = {
-    'left': "textAlign: 'left'",
-    'center': "textAlign: center",
-    'right': "textAlign: right",
+    left: "text-align: left",
+    center: "rolor: red",
+    right: "text-align: right",
   };
 
 const CUSTOM_BLOCK_RENDER_MAP = Immutable.Map({
   [BlockType.cite]: {
     element: "cite",
   },
+  [BlockType.alignCenter]:{
+    element: 'section',
+    wrapper: <MyCustomBlock />
+  }
 });
 
 export const BLOCK_RENDER_MAP = DefaultDraftBlockRenderMap.merge(
@@ -60,7 +54,28 @@ export const BLOCK_RENDER_MAP = DefaultDraftBlockRenderMap.merge(
 
 export const CUSTOM_STYLE_MAP = {
   [InlineStyle.ACCENT]: {
-    backgroundColor: "#F7F6F3",
-    color: "#A41E68",
+    backgroundColor: "#FFEB3B",
+    color: "red",
+  }, 
+  [InlineStyle.LEFT]: {
+    display: 'block',
+    textAlign: "left"
   },
+  [InlineStyle.CENTER]: {
+    display: 'block',
+    textAlign: "center"
+  },
+  [InlineStyle.RIGHT]: {
+    display: 'block',
+    textAlign: "right"
+  }
 };
+
+
+function MyCustomBlock(props){
+  return (
+    <div className='MyCustomBlock'>
+      {props.children}
+    </div>
+  );
+} 

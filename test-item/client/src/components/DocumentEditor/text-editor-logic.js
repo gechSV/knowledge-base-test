@@ -16,11 +16,12 @@ export default class TextEditorLogic{
     }
 
     SetBlocStyle(editorState, setEditorState, style){
-        setEditorState();
+        setEditorState(RichUtils.toggleBlockType(editorState, style));
     }
 
     Fun(editorState, setEditorState){
-        setEditorState(RichUtils.onTab(editorState));
+        setEditorState
+            (RichUtils.toggleInlineStyle(editorState, InlineStyle.CENTER));
     }
 
 

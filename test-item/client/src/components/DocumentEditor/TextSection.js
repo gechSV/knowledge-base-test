@@ -172,13 +172,31 @@ function TextSection(props){
                   <a>Обычный текс</a>
                 </button>
 
-                {/* test */}
+                {/* Left */}
                 <button 
                     onMouseDown = {
-                        () => editorLogic.Fun(
-                            editorState, setEditorState)
+                        () => editorLogic.SetInLineStyle(
+                            editorState, setEditorState, InlineStyle.LEFT)
                     }>
-                  <a>test</a>
+                  <a>left</a>
+                </button>
+
+                {/* Center */}
+                <button 
+                    onMouseDown = {
+                        () => editorLogic.SetInLineStyle(
+                            editorState, setEditorState, InlineStyle.CENTER)
+                    }>
+                  <a>center</a>
+                </button>
+
+                {/* right */}
+                <button 
+                    onMouseDown = {
+                        () => editorLogic.SetInLineStyle(
+                            editorState, setEditorState, InlineStyle.RIGHT)
+                    }>
+                  <a>right</a>
                 </button>
                 
             </container>
@@ -188,6 +206,7 @@ function TextSection(props){
                 customStyleMap={CUSTOM_STYLE_MAP}
                 blockRenderMap={BLOCK_RENDER_MAP}
                 handleKeyCommand={handleKeyCommand}
+                className = "editor"
                 />
         </section>
     )
