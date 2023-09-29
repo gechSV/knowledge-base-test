@@ -1,6 +1,6 @@
 import {makeAutoObservable} from 'mobx';
 import {Editor, EditorState, RichUtils} from 'draft-js';
-import { useContext, useState} from 'react';
+import {React, useContext, useState} from 'react';
 import { BlockType, InlineStyle, alignStyleMap } from './config';
 
 
@@ -24,5 +24,8 @@ export default class TextEditorLogic{
             (RichUtils.toggleInlineStyle(editorState, InlineStyle.CENTER));
     }
 
+    // Tab(editorState, setEditorState){
+    //     setEditorState(RichUtils.onTab())
+    // }
 
 }

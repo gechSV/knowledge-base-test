@@ -1,35 +1,49 @@
 @font-face {
   font-family: "RobotoMono-Light";
   src: local(RobotoMono-Light), 
-  url(./fonts/Roboto/static/RobotoMono-Light.ttf) format("truetype");
+  url(./fonts/RobotoMono/static/RobotoMono-Light.ttf) format("truetype");
   font-weight: normal;  
 }
 
 @font-face {
   font-family: "RobotoMono-Bold";
   src: local(RobotoMono-Bold), 
-  url(./fonts/Roboto/static/RobotoMono-Bold.ttf) format("truetype");
+  url(./fonts/RobotoMono/static/RobotoMono-Bold.ttf) format("truetype");
   font-weight: normal;
 }
 
 @font-face {
   font-family: "RobotoMono-LightItalic";
   src: local(RobotoMono-LightItalic), 
-  url(./fonts/Roboto/static/RobotoMono-LightItalic.ttf) format("truetype");
+  url(./fonts/RobotoMono/static/RobotoMono-LightItalic.ttf) format("truetype");
   font-weight: normal;
 }
 
 @font-face {
   font-family: "RobotoMono-Italic";
   src: local(RobotoMono-Italic), 
-  url(./fonts/Roboto/static/RobotoMono-Italic.ttf) format("truetype");
+  url(./fonts/RobotoMono/static/RobotoMono-Italic.ttf) format("truetype");
   font-weight: normal;
 }
 
 @font-face {
   font-family: "RobotoMono-Regular";
   src: local(RobotoMono-Regular), 
-  url(./fonts/Roboto/static/RobotoMono-Regular.ttf) format("truetype");
+  url(./fonts/RobotoMono/static/RobotoMono-Regular.ttf) format("truetype");
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: "Roboto-Regular";
+  src: local(Roboto-Regular), 
+  url(./fonts/Roboto/Roboto-Regular.ttf) format("truetype");
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: "Roboto-Bold";
+  src: local(Roboto-Bold), 
+  url(./fonts/Roboto/Roboto-Bold.ttf) format("truetype");
   font-weight: normal;
 }
 

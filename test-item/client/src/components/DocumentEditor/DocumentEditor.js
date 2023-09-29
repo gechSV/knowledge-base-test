@@ -13,16 +13,20 @@ function DocumentEditor(){
     const {store} = useContext(Context);
     const {textEditorStore} = useContext(Context);
 
-    const [documentSections, setDocumentSections] = useState(() => (new Document()));
+    const [documentSections, setDocumentSections] =
+        useState(localStorage.getItem('sections') ? 
+        JSON.parse(localStorage.getItem('sections')) : () => (new Document()));
 
     useEffect(() => {
-
+        localStorage.setItem("sections", JSON.stringify(documentSections))
     }, [store, documentSections])
 
     // const documentSections = new DocumentSections();
     function addTextSection(){
         let newDoc = new Document(documentSections.sections);
-        newDoc.newSection({type: 'TextSection', data: '', key: documentSections.lenth + 1});
+        let ref = React.createRef();
+        console.log(ref);
+        newDoc.newSection({type: 'TextSection', data: '', key: documentSections.lenth + 1, ref: ref});
         setDocumentSections(newDoc);
     }
 
@@ -38,8 +42,10 @@ function DocumentEditor(){
             </div>
             <div className='workContainer'>
                 {documentSections.sections.map((el, i) => (
-                    <TextSection 
-                        key={i}/>
+                    <TextSection
+                        ref = {el.ref} 
+                        key={i}
+                        />
                 ))}
             </div>
         </div>

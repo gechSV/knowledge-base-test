@@ -37,7 +37,7 @@
     width: 100%;
     height: 200px;
     height: auto;
-    background: #fafafa;
+    background: #ffffff;
     margin: 10px 0;
 }
 
@@ -56,8 +56,31 @@
     padding: 0 20%;
 }
 
-div.DraftEditor-root{
+/* div.DraftEditor-root{
     border: 1px solid #000;
     height: auto;
     overflow-y: auto;
+}
+ol.public-DraftStyleDefault-ol{
+    margin: 0.1em;
+} */
+
+.H1 {
+    color: #2F4F4F;
+    font-family: 'Roboto-Bold';
+    font-size: 34px;
+}
+
+.H2 {
+    color: #2F4F4F;
+    font-family: 'Roboto-Bold';
+    font-size: 32px;
+}
+
+
+
+.unstyled{
+    color: #000000;
+    font-family: 'Roboto-Regular';
+    font-size: 16px;
 }

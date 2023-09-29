@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState} from 'react';
+import React, { useContext, useEffect, useState, useCallback} from 'react';
 import { observer } from 'mobx-react-lite';
 import './style-document-editor.css'
 import {Editor, EditorState, RichUtils} from 'draft-js';
@@ -30,9 +30,35 @@ function TextSection(props){
         return 'not-handled';
     }
 
+    const tabFunction = useCallback((event) => {
+        if (event.key === "Tab") {
+          console.log('asdadadad')
+        }
+      }, []);
+
+    function _onTab(e) {
+        const maxDepth = 1;
+        setEditorState(RichUtils.onTab(e, editorState, 2));
+    }
 
     function onBoldClick(){
         editorLogic.onBoldClick(setEditorState, editorState);
+    }
+
+    function myBlockStyleFn(contentBlock) {
+        const type = contentBlock.getType();
+
+        if(type === "header-one"){
+            return 'H1';
+        }
+        if(type === "header-two"){
+            return 'H2';
+        }
+        
+        if(type === "unstyled"){
+            return "unstyled"
+        }
+
     }
 
     return(
@@ -198,6 +224,15 @@ function TextSection(props){
                     }>
                   <a>right</a>
                 </button>
+
+                {/* tab */}
+                {/* <button 
+                    onMouseDown = {
+                        () => editorLogic.Tab(
+                            editorState, setEditorState, InlineStyle.RIGHT)
+                    }>
+                  <a>tab</a>
+                </button> */}
                 
             </container>
             <Editor 
@@ -206,7 +241,8 @@ function TextSection(props){
                 customStyleMap={CUSTOM_STYLE_MAP}
                 blockRenderMap={BLOCK_RENDER_MAP}
                 handleKeyCommand={handleKeyCommand}
-                className = "editor"
+                onTab={_onTab}
+                blockStyleFn={myBlockStyleFn}
                 />
         </section>
     )
