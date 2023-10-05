@@ -1,11 +1,12 @@
-import React, { useContext, useEffect, useState, useRef} from 'react';
+import React, { useContext, useEffect, useState} from 'react';
 import { Context } from '../../index';
 import { observer } from 'mobx-react-lite';
 import './style-document-editor.css'
 import { Document } from '../../models/DocumentSections/Document';
-import TextSection from './TextSection';
-import 'draft-js/dist/Draft.css';
-import {Editor, EditorState, RichUtils} from 'draft-js';
+import TextEditor from "./TextEditor"
+// import TextSection from './OLDTextSection';
+// import 'draft-js/dist/Draft.css';
+// import {Editor, EditorState, RichUtils} from 'draft-js';
 
 
 
@@ -34,20 +35,11 @@ function DocumentEditor(){
         <div className='document-editor-container'> 
             <div className='toolbar'>
                 <button
-                    className='toolbar-button'
-                    onClick={() => addTextSection()}
-                    >
+                    className='toolbar-button'>
                          Добавить секцию 
                 </button>
             </div>
-            <div className='workContainer'>
-                {documentSections.sections.map((el, i) => (
-                    <TextSection
-                        ref = {el.ref} 
-                        key={i}
-                        />
-                ))}
-            </div>
+            <TextEditor />
         </div>
     )
 }

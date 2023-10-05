@@ -4,7 +4,7 @@ import './style-document-editor.css'
 import {Editor, EditorState, RichUtils} from 'draft-js';
 import 'draft-js/dist/Draft.css';
 import { Context } from '../../index';
-import TextEditorLogic from './text-editor-logic';
+import TextEditorLogic from './OLDtext-editor-logic';
 import { BlockType, InlineStyle, BLOCK_LABELS, BLOCK_RENDER_MAP, CUSTOM_STYLE_MAP} from './config';
 
 
