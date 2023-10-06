@@ -2,34 +2,17 @@ import React, { useContext, useEffect, useState} from 'react';
 import { Context } from '../../index';
 import { observer } from 'mobx-react-lite';
 import './style-document-editor.css'
-import { Document } from '../../models/DocumentSections/Document';
-import TextEditor from "./TextEditor"
-// import TextSection from './OLDTextSection';
-// import 'draft-js/dist/Draft.css';
-// import {Editor, EditorState, RichUtils} from 'draft-js';
-
+import TextEditor from './TextEditor';
 
 
 function DocumentEditor(){
     const {store} = useContext(Context);
-    const {textEditorStore} = useContext(Context);
 
-    const [documentSections, setDocumentSections] =
-        useState(localStorage.getItem('sections') ? 
-        JSON.parse(localStorage.getItem('sections')) : () => (new Document()));
+    const [documentSections, setDocumentSections] = useState();
 
     useEffect(() => {
-        localStorage.setItem("sections", JSON.stringify(documentSections))
+        localStorage.setItem("sections", "")
     }, [store, documentSections])
-
-    // const documentSections = new DocumentSections();
-    function addTextSection(){
-        let newDoc = new Document(documentSections.sections);
-        let ref = React.createRef();
-        console.log(ref);
-        newDoc.newSection({type: 'TextSection', data: '', key: documentSections.lenth + 1, ref: ref});
-        setDocumentSections(newDoc);
-    }
 
     return(
         <div className='document-editor-container'> 
@@ -39,7 +22,7 @@ function DocumentEditor(){
                          Добавить секцию 
                 </button>
             </div>
-            <TextEditor />
+            <TextEditor/>
         </div>
     )
 }

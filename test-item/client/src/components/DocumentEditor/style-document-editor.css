@@ -3,11 +3,9 @@
     width: 100%;
     height: 600px;
     background: #999999;
-    display: flex;
-    justify-content: center;
     align-items: center;
-    flex-wrap: wrap;
-    align-content: space-between;
+    display: flex;
+    flex-direction: column;
 }
 
 .toolbar{
@@ -46,49 +44,14 @@
     height: 100%;
     background-color: #123456;
     font-size: 24px;
-
 }
 
-.MyCustomBlock{
-    position: relative;
-    background-color: green;
-    display: block;
-    padding: 0 20%;
+.editor{
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
+    text-align: start;
 }
-
-/* div.DraftEditor-root{
-    border: 1px solid #000;
-    height: auto;
-    overflow-y: auto;
-}
-ol.public-DraftStyleDefault-ol{
-    margin: 0.1em;
-} */
-
-.H1 {
-    color: #2F4F4F;
-    font-family: 'Roboto-Bold';
-    font-size: 34px;
-}
-
-.H2 {
-    color: #2F4F4F;
-    font-family: 'Roboto-Bold';
-    font-size: 32px;
-}
-
-
-
-.unstyled{
-    color: #000000;
-    font-family: 'Roboto-Regular';
-    font-size: 16px;
-}
-
-.ck-editor__editable_inline{
-    min-height: 80vh !important;
-    max-height: 80vh !important;
-  }
 
 
   
