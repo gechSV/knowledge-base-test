@@ -1,6 +1,7 @@
 import React, { Component, useContext, useEffect, useState, useRef} from 'react';
 import { Context } from '../../index';
 import { observer } from 'mobx-react-lite';
+import { makeObservable, observable } from 'mobx';
 import './style-document-editor.css'
 import TextEditor from './TextEditor';
 import { Document } from '../../models/DocumentSections/Document';
@@ -30,33 +31,54 @@ import { Document } from '../../models/DocumentSections/Document';
 
 
 class DocumentEditor extends Component{
+    // sections = new Document();
+
     constructor(props){
-        super(props)
-        this.sections = useState(new Document());
+        super(props);
+        // const sections = new Document()
+ 
+        this.state = {
+            sections: new Document(),
+        }
+        console.log(this.state.sections)
     }
 
-    // renderSections(){
-    //     sec = this.sections.getSections()
-    //     return()
+    addNewSection = () => {
+        const newSections = new Document(this.state.sections.getSections());
+        newSections.newSection({type: "text", data: "", key: '', ref: ''});
+        this.setState({sections: newSections})
+        // this.setState((prevState) => {
+        //     return newSections
+        // })
 
-    // }
+        console.log(this.state.sections)
+        // newState.new
+        // this.setState(sections: {type: "text", data: "", key: '', ref: ''})
+    }
+
+    componentDidUpdate(prevProps, prevState){
+        if(prevState.sections != this.state.sections){
+            console.log('sadasdasda')
+        }
+    }
 
     render( ){
+        const {sections} = this.state;
         return (
         <div className='document-editor-container'> 
              <div className='toolbar'>
                  <button
                      className='toolbar-button'
-                     onClick={() => (this.sections.newSection(
-                        {type: "text", data: "", key: '', ref: ''}))}>
+                     onClick={() => {this.addNewSection()}}>
                           Добавить секцию 
                  </button>
              </div>
-             {this.sections.getSections().map((el) => {
-                <TextEditor />
-             })}
+                {sections.getSections().map((el) => {
+                   <div>123456789</div>
+                })}
+                {/* <div> {sections} </div> */}
         </div>)
     }
 }
 
-export default (DocumentEditor);
+export default DocumentEditor;
