@@ -12,7 +12,7 @@ class TextEditor extends Component{
     constructor(props){
         super(props)
         this.state = {editorState: EditorState.createEmpty(),};
-        this.hideToolbar = false;
+        this.hideToolbar = true;
     }
 
     onEditorStateChange = (editorState) => {

@@ -74,7 +74,7 @@ class DocumentEditor extends Component{
                  </button>
              </div>
                 {sections.getSections().map((el) => {
-                   <div>{ 1221221}</div>
+                   return (<TextEditor />)
                 })}
                 {/* <div> {sections} </div> */}
         </div>)
