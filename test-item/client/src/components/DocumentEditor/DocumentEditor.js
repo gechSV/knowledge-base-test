@@ -46,7 +46,7 @@ class DocumentEditor extends Component{
     addNewSection = () => {
         const newSections = new Document(this.state.sections.getSections());
         newSections.newSection({type: "text", data: "", key: '', ref: ''});
-        this.setState({sections: newSections})
+        this.setState({sections: newSections}, () => { this.render()})
         // this.setState((prevState) => {
         //     return newSections
         // })
@@ -74,7 +74,7 @@ class DocumentEditor extends Component{
                  </button>
              </div>
                 {sections.getSections().map((el) => {
-                   <div>123456789</div>
+                   <div>{ 1221221}</div>
                 })}
                 {/* <div> {sections} </div> */}
         </div>)
