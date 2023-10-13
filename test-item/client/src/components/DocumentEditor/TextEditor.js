@@ -5,6 +5,7 @@ import './style-document-editor.css'
 import { Editor } from "react-draft-wysiwyg";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { EditorState } from 'draft-js';
+import {Animated} from "react-animated-css";
 
 
 class TextEditor extends Component{
