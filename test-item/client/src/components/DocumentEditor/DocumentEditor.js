@@ -33,22 +33,14 @@ class DocumentEditor extends Component{
         let newState = documentEditorStore.getDoc();
         this.setState({docState: newState});
         // this.state.docState.addNewSection();
-        // console.log(this.state.docState.getDoc())
-        this.render()
+        // console.log(this.state.docState)
+        // this.render()
     }
 
-    // componentDidUpdate(prevProps, prevState){
-    //     if(prevState.sections != this.state.sections){
-
-    //     }
-    // }
-
-    // componentDidUpdate() {
-    //     console.log("Update", this.context);
-    //   }
 
     render( ){
-        const doc = this.state.docState; 
+        const doc = this.state.docState;
+        console.log(doc) 
         return (
         <div className='document-editor-container'> 
              <div className='toolbar'>

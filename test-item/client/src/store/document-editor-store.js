@@ -8,9 +8,10 @@ import { Document } from '../models/DocumentSections/Document';
 export default class DocumentEditorStore{
     constructor(){
         makeAutoObservable(this);
+        this.document.newSection({type: "text", data: "", key: '', ref: ''})
     }
 
-    document = new Document([{type: "text", data: "", key: '', ref: ''}]);
+    document = new Document();
 
     addNewSection(section){
         const newSections = new Document(this.document.getSections());
