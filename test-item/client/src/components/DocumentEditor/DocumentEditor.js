@@ -1,25 +1,26 @@
 import React, { Component, useContext, useEffect, useState, useRef} from 'react';
-import { Context, store , DocumentEditorStore} from '../../index';
+import { Context, store , documentEditorStore} from '../../index';
 import { observer } from 'mobx-react-lite';
 import { makeObservable, observable } from 'mobx';
 import './style-document-editor.css'
 import TextEditor from './TextEditor';
 import { Document } from '../../models/DocumentSections/Document';
+import DocumentEditorStore from '../../store/document-editor-store';
 
 class DocumentEditor extends Component{
-    // sections = new Document();
-    // Context = useContext(Context);
     constructor(props){
         super(props);
-        // const sections = new Document()
  
         this.state = {
-            sections: new Document(),
+            docState: documentEditorStore.getDoc()
         }
 
         console.log(this.state.sections)
+        // console.log(this.docEditStore)
+
     }
 
+    // static context = documentEditorStore;
     // Добавление новой текстовой секции
     addNewTextSection = () => {
         // const newSections = new Document(this.state.sections.getSections());
@@ -28,8 +29,11 @@ class DocumentEditor extends Component{
 
         // console.log("Добавлена текстовая секция.")
 
-        this.docEditStore.addNewSection();
-        console.log(this.docEditStore.getDoc())
+        documentEditorStore.addNewSection();
+        let newState = documentEditorStore.getDoc();
+        this.setState({docState: newState});
+        // this.state.docState.addNewSection();
+        // console.log(this.state.docState.getDoc())
         this.render()
     }
 
@@ -39,7 +43,12 @@ class DocumentEditor extends Component{
     //     }
     // }
 
+    // componentDidUpdate() {
+    //     console.log("Update", this.context);
+    //   }
+
     render( ){
+        const doc = this.state.docState; 
         return (
         <div className='document-editor-container'> 
              <div className='toolbar'>
@@ -49,10 +58,9 @@ class DocumentEditor extends Component{
                           Добавить секцию 
                  </button>
              </div>
-                {DocumentEditorStore.getDoc().map((el) => {
+                {doc.map((el) => {
                    return (<TextEditor />)
                 })}
-                {/* <div> {sections} </div> */}
         </div>)
     }
 }

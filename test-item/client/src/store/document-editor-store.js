@@ -5,11 +5,9 @@ import { Document } from '../models/DocumentSections/Document';
 
 
 // Модуль для управления редактором документов приложения
-export default new class DocumentEditorStore{
+export default class DocumentEditorStore{
     constructor(){
-        makeAutoObservable(this, {
-            document: observable
-        });
+        makeAutoObservable(this);
     }
 
     document = new Document([{type: "text", data: "", key: '', ref: ''}]);

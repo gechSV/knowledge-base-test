@@ -7,14 +7,15 @@ import DocumentEditorStore from './store/document-editor-store';
 
 export const store = new Store();
 export const navigationStore = new NavigationStore();
+export const documentEditorStore = new DocumentEditorStore();
 
 export const Context = createContext({
-    store, navigationStore, DocumentEditorStore, 
+    store, navigationStore, documentEditorStore, 
 })
 
 ReactDOM.render(
     <Context.Provider value={{
-        store, navigationStore, DocumentEditorStore
+        store, navigationStore, documentEditorStore
     }}>
         <App />
     </Context.Provider>,
