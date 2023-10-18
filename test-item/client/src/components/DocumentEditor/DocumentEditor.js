@@ -1,7 +1,7 @@
 import React, { Component, useContext, useEffect, useState, useRef} from 'react';
 import { Context, store , documentEditorStore} from '../../index';
 import { observer } from 'mobx-react-lite';
-import { makeObservable, observable } from 'mobx';
+import { makeObservable, observable, reaction } from 'mobx';
 import './style-document-editor.css'
 import TextEditor from './TextEditor';
 import { Document } from '../../models/DocumentSections/Document';
@@ -20,27 +20,17 @@ class DocumentEditor extends Component{
 
     }
 
-    // static context = documentEditorStore;
     // Добавление новой текстовой секции
     addNewTextSection = () => {
-        // const newSections = new Document(this.state.sections.getSections());
-        // newSections.newSection({type: "text", data: "", key: '', ref: ''});
-        // this.setState({sections: newSections})
-
-        // console.log("Добавлена текстовая секция.")
-
         documentEditorStore.addNewSection();
         let newState = documentEditorStore.getDoc();
         this.setState({docState: newState});
-        // this.state.docState.addNewSection();
-        // console.log(this.state.docState)
-        // this.render()
     }
 
 
     render( ){
         const doc = this.state.docState;
-        console.log(doc) 
+        console.log("doc[0].ref", doc[0].ref)
         return (
         <div className='document-editor-container'> 
              <div className='toolbar'>
@@ -49,9 +39,14 @@ class DocumentEditor extends Component{
                      onClick={() => {this.addNewTextSection()}}>
                           Добавить секцию 
                  </button>
+                 <button
+                     className='toolbar-button'
+                     onClick={() => {}}>
+                          Добавить секцию 
+                 </button>
              </div>
                 {doc.map((el) => {
-                   return (<TextEditor />)
+                   return (<TextEditor editorState={el.state}/>)
                 })}
         </div>)
     }

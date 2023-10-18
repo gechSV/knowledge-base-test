@@ -52,6 +52,24 @@
     width: 80%;
 }
 
+@keyframes openAnimation {
+    0% {
+      display: none;
+      opacity: 0;
+    }
+  
+    1% {
+      display: flex;
+      opacity: 0;
+    }
+  
+    100% {
+      display: flex;
+      opacity: 1;
+    }
+  }
+
+
 .toolbarClassName{
     background: #ffffff !important; 
     border-radius: 10px !important;
@@ -59,16 +77,15 @@
     padding: 5px 0 0 5px !important;
     height: auto !important;
     margin: 5px 0 0 0;
-    transition: margin .5s;
+    animation: openAnimation 1s ease-in-out;
 }
 
 .hideToolbar{
+    animation: closeAnimation 1s ease-in-out;
     display: none !important;
 }
 
-.toolbarClassName div{
-    border-radius: 5px !important;
-}
+
 
 .rdw-option-wrapper{
     margin: 0 5px 0 0 !important;

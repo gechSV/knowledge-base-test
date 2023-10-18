@@ -8,6 +8,8 @@ export class Section{
         // ..
         this.key = vol.key;
         // Ссылка на React компонент
-        this.ref = vol.ref;
+        // this.ref = vol.ref;
+
+        this.state = vol.state;
     }
 }
