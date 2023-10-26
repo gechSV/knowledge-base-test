@@ -2,7 +2,7 @@ import React, { useContext, useEffect} from 'react';
 import { Context } from '../../index';
 import { observer } from 'mobx-react-lite';
 import './style-content-container.css'
-import DocumentEditor from '../DocumentEditor/DocumentEditor';
+import Editor from '../DocumentEditor/Editor';
 
 function ContentContainer(){
     const {store} = useContext(Context);
@@ -15,7 +15,7 @@ function ContentContainer(){
     if (navigationStore.isOpenEditDocumentWindow){
         return(
             <div className='content-container'> 
-                <DocumentEditor/>
+                <Editor/>
             </div>
         )
     }

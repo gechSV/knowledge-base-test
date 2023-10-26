@@ -1,18 +1,17 @@
-import React, {Component, useContext, useEffect, useState} from 'react';
-import { Context, documentEditorStore} from '../../index';
-import { observer } from 'mobx-react-lite';
+import React, {Component} from 'react';
+import { documentEditorStore} from '../../index';
 import './style-document-editor.css'
 import { Editor } from "react-draft-wysiwyg";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
-import { EditorState, convertToRaw } from 'draft-js';
-import {Animated} from "react-animated-css";
 
 
 class TextEditor extends Component{
     // const [editorState, setEditorState] = useState();
     constructor(props){
         super(props)
-        this.state = {editorState: props.editorState,};
+        this.state = {editorState : props.editorState,};
+        this.stateIndex = this.props.stateIndex;
+        console.log("this.stateIndex: ", this.stateIndex)
         this.hideToolbar = true;
     }
 
@@ -20,18 +19,14 @@ class TextEditor extends Component{
         this.setState({
           editorState,
         });
+        documentEditorStore.setSectionByindex(this.stateIndex, this.state.editorState);
       };
 
     render(){
-
-        const { editorState } = this.state;
-        console.log("state.editorState", editorState)
-        console.log('+ ', convertToRaw(editorState.getCurrentContent()))
         return(
             <Editor
                 editorState={this.state.editorState}
                 onEditorStateChange={this.onEditorStateChange}
-                // toolbarClassName="toolbarClassName"
                 wrapperClassName="wrapperClassName"
                 editorClassName="editorClassName"
                 toolbarClassName={this.hideToolbar ? "hideToolbar" : "toolbarClassName"}
