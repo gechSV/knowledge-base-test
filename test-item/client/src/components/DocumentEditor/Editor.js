@@ -27,7 +27,7 @@ class Editor extends Component{
         console.log("deleteSection index", index);
         documentEditorStore.deleteSectionsByIndex(index);
         // let newState = ;
-        this.setState(update({docState: documentEditorStore.getDoc()}));
+        this.setState({docState: documentEditorStore.getDoc()});
     }
 
     render( ){
