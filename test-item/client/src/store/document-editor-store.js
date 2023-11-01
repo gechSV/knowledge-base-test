@@ -30,8 +30,8 @@ export default class DocumentEditorStore{
         this.document = new Document(newSections.getSections());
     }
 
-    setSectionByindex(index, data){
-        this.document.setDataByindex(index, data);
+    setSectionByindex(index, state){
+        this.document.setStateDataByindex(index, state);
     }
 
     getDoc(){

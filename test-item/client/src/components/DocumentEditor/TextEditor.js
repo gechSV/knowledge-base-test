@@ -20,18 +20,24 @@ class TextEditor extends Component{
           editorState,
         });
         documentEditorStore.setSectionByindex(this.stateIndex, this.state.editorState);
-      };
+    };
+
+    onChangeState(index, sections){
+        documentEditorStore.setSectionByindex(index, sections)
+    }
 
     render(){
+        let editorState = this.state.editorState
         return(
             <Editor
-                editorState={this.state.editorState}
+                editorState={editorState}
                 onEditorStateChange={this.onEditorStateChange}
                 wrapperClassName="wrapperClassName"
                 editorClassName="editorClassName"
                 toolbarClassName={this.hideToolbar ? "hideToolbar" : "toolbarClassName"}
                 onFocus={() => {this.hideToolbar = false}}
                 onBlur={() => {this.hideToolbar = true}}   
+                // onChange={() => {this.onChangeState(this.stateIndex, editorState)}} 
             />
         )
     }

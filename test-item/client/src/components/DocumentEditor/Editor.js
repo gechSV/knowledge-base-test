@@ -3,6 +3,8 @@ import {documentEditorStore} from '../../index';
 import './style-document-editor.css'
 import TextEditor from './TextEditor';
 import deleteLogo from "../../images/svg/delete.svg"
+import { EditorState, convertToRaw } from 'draft-js';
+
 
 
 class Editor extends Component{
@@ -22,15 +24,18 @@ class Editor extends Component{
     }
     
     deleteSection(index){
-        console.log("deleteSection", index);
+        console.log("deleteSection index", index);
         documentEditorStore.deleteSectionsByIndex(index);
-        let newState = documentEditorStore.getDoc();
-        this.setState({docState: newState})
+        // let newState = ;
+        this.setState(update({docState: documentEditorStore.getDoc()}));
     }
 
     render( ){
-        const doc = this.state.docState;
-        console.log("doc:", doc)
+        let doc = this.state.docState;
+        // // console.log("render doc: ", )
+        // for(let i = 0; i< doc.length; i++){
+        //     console.log(i, '+ ', convertToRaw(doc[i].state.getCurrentContent()))
+        // }
         return (
         <div className='document-editor-container'> 
              <div className='toolbar'>
@@ -44,14 +49,25 @@ class Editor extends Component{
                      onClick={() => {documentEditorStore.consoleLogAllText()}}>
                           Вывод в консоль
                  </button>
+
+                 <button
+                     className='toolbar-button'
+                     onClick={() => {this.setState({docState: documentEditorStore.getDoc()});}}>
+                          кукутвук
+                 </button>
+
              </div>
-                {doc.map((el) => {
+                {doc.map((el, i) => {
+                    console.log(i, '+= ', convertToRaw(el.state.getCurrentContent()).blocks)
                    return (
                         <div className='textEditorCon'>
-                            <TextEditor stateIndex = {el.index} editorState={el.state}/>
+                            <TextEditor 
+                                stateIndex = {el.index} 
+                                editorState={el.state}/>
                             <button 
                                 className='deleteSections'
-                                onClick={() => {this.deleteSection(el.index)}}
+                                id={'delButtonId_' + i}
+                                onClick={() => {this.deleteSection(i)}}
                                 >
                                 <img src={deleteLogo}>
                                 </img>   

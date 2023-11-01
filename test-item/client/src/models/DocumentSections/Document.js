@@ -1,4 +1,5 @@
 import { Section } from "./Section";
+import { EditorState, convertToRaw } from 'draft-js';
 
 /**
  * Класс управления секциями документа
@@ -10,7 +11,7 @@ export class Document{
      * @param {Section} section : необязательный параметр. Объект класса Section
      */
     constructor(section){
-        this.sections = section ? section.splice(0) : [] 
+        this.sections = section ? section.slice(0) : [] 
     }
 
     /**
@@ -36,25 +37,19 @@ export class Document{
      * @param {int} index индекс 
      * @param {state} state состояние компонента
      */
-    setDataByindex(index, state){
+    setStateDataByindex(index, state){
         this.sections[index].state = state;
     }
 
     deleteSectionByIndex(index){
-        console.log("Doc sec: ", this.sections)
-        console.log("Doc index: ", index)
-
         this.sections.splice(index, 1);
-        // this.sections = newArr;
-        // this.sections = newArr
         this.reIndex();
-        // console.log(this.sections)
-        console.log("Doc sec: ",this.sections)
     }
 
     reIndex(){
         for(let i = 0; i < this.sections.length; i++){
             this.sections[i].index = i;
+            // console.log(convertToRaw(this.sections[i].state.getCurrentContent()))
         }
     }
 }
