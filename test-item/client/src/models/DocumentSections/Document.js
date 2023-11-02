@@ -1,3 +1,4 @@
+import shortid from "shortid";
 import { Section } from "./Section";
 import { EditorState, convertToRaw } from 'draft-js';
 
@@ -20,7 +21,7 @@ export class Document{
      */
     newSection(sectionVal){
         let newSection = new Section(sectionVal);
-        newSection.index = this.sections.length;
+        newSection.index = shortid.generate();
         this.sections.push(newSection);
     }
 
@@ -43,12 +44,17 @@ export class Document{
 
     deleteSectionByIndex(index){
         this.sections.splice(index, 1);
-        this.reIndex();
+        // this.reIndex();
+    }
+
+    reloadSections(newArr){
+        this.sections = newArr.slice();
+        // this.reIndex()
     }
 
     reIndex(){
         for(let i = 0; i < this.sections.length; i++){
-            this.sections[i].index = i;
+            this.sections[i].index = shortid.generate();
             // console.log(convertToRaw(this.sections[i].state.getCurrentContent()))
         }
     }

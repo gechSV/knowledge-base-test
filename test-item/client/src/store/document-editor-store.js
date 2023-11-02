@@ -1,6 +1,7 @@
 import {makeAutoObservable} from 'mobx';
 import { Document } from '../models/DocumentSections/Document';
 import { EditorState, convertToRaw } from 'draft-js';
+import shortid from 'shortid';
 
 
 /**
@@ -10,7 +11,7 @@ export default class DocumentEditorStore{
     constructor(){
         makeAutoObservable(this);
         this.document.newSection({
-                index: 0,
+                index: shortid.generate(),
                 type: "text", 
                 state: EditorState.createEmpty()
             });
@@ -18,12 +19,19 @@ export default class DocumentEditorStore{
 
     document = new Document();
 
+    reloadDocument(newDoc){
+        console.log("newDoc", newDoc)
+        this.document = new Document(newDoc);
+    }
+
     addNewTextSection(){
         const newSections = new Document(this.document.getSections());
         // let len = this.document.getSections().length;
         // console.log("len: ", len)
+        const id = shortid.generate();
+        console.log("shortid.generate ", id)
         newSections.newSection({
-            index: 0,
+            index: id,
             type: "text", 
             state: EditorState.createEmpty()
         });

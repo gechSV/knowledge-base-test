@@ -82,7 +82,7 @@
 // export default (Editor);
 
 
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import {Context} from '../../index';
 import './style-document-editor.css'
 import TextEditor from './TextEditor';
@@ -94,19 +94,28 @@ function Editor(){
     const {documentEditorStore} = useContext(Context);
     const [docState, setDocState] = useState(documentEditorStore.getDoc());
 
+    useEffect(() => {
+    }, [documentEditorStore])
+
     // Добавление новой текстовой секции
     function  addNewTextSection(){
+        documentEditorStore.reloadDocument(docState);
         documentEditorStore.addNewTextSection();
         setDocState(documentEditorStore.getDoc())
     }
     
 
     function deleteSection(index){
-        console.log("deleteSection index", index);
-        documentEditorStore.deleteSectionsByIndex(index);
-        setDocState(documentEditorStore.getDoc());
+        // console.log("deleteSection index", index);
+        const bufArr = docState.slice();
+        bufArr.splice(index, 1);
+        // console.log("test", test)
+        setDocState(bufArr);
+        documentEditorStore.reloadDocument(docState);
+        // documentEditorStore.deleteSectionsByIndex(index);
+        // setDocState(documentEditorStore.getDoc());
     }
-
+    
     return (
         <div className='document-editor-container'> 
              <div className='toolbar'>
@@ -123,7 +132,7 @@ function Editor(){
 
                  <button
                      className='toolbar-button'
-                     onClick={() => {setDocState(documentEditorStore.getDoc())}}>
+                     onClick={() => {console.log(documentEditorStore.getDoc())}}>
                           кукутвук
                  </button>
 
@@ -131,9 +140,9 @@ function Editor(){
                 {docState.map((el, i) => {
                     console.log(i, '+= ', convertToRaw(el.state.getCurrentContent()).blocks)
                    return (
-                        <div className='textEditorCon'>
+                        <div className='textEditorCon'  key={el.index}>
                             <TextEditor 
-                                editorIndex = {el.index} 
+                                editorIndex = {i} 
                                 editorState={el.state}/>
                             <button 
                                 className='deleteSections'
