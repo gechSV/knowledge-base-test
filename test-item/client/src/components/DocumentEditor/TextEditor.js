@@ -65,12 +65,7 @@ function TextEditor(props){
         setEditorState(newEditorState);
         documentEditorStore.setSectionByindex(editorIndex, newEditorState);
     }
-
-    const eonEditorStateChange = (newEditorState) => {
-            setEditorState(newEditorState)
-            documentEditorStore.setSectionByindex(this.stateIndex, newEditorState);
-        };
-
+ 
     return(
         <Editor
             editorState={editorState}
