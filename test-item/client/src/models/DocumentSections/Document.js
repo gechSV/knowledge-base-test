@@ -1,6 +1,6 @@
 import shortid from "shortid";
-import { Section } from "./Section";
-import { EditorState, convertToRaw } from 'draft-js';
+import { ISection } from "./ISection";
+import { EditorState} from 'draft-js';
 
 /**
  * Класс управления секциями документа
@@ -9,7 +9,7 @@ export class Document{
 
     /**
      * Конструктор класса
-     * @param {Section} section : необязательный параметр. Объект класса Section
+     * @param {ISection} section : необязательный параметр. Объект класса Section
      */
     constructor(section){
         this.sections = section ? section.slice(0) : [] 
@@ -17,12 +17,16 @@ export class Document{
 
     /**
      * Добавление новой секции в массив
-     * @param {index, type, state} sectionVal : {index, type, state}
+     * @param {index, type, state} sectionVal : {shortid, type, state}
      */
     newSection(sectionVal){
-        let newSection = new Section(sectionVal);
+        let newSection = new ISection(sectionVal);
         newSection.index = shortid.generate();
         this.sections.push(newSection);
+    }
+
+    setSections(newArr){
+        this.sections = newArr.slice();
     }
 
     /**
@@ -36,21 +40,20 @@ export class Document{
     /**
      * Установка нового значения секции по его индексу
      * @param {int} index индекс 
-     * @param {state} state состояние компонента
+     * @param {EditorState} state состояние компонента
      */
     setStateDataByindex(index, state){
         this.sections[index].state = state;
     }
 
+    /**
+     * 
+     * @param {int} index 
+     */
     deleteSectionByIndex(index){
         this.sections.splice(index, 1);
-        // this.reIndex();
     }
 
-    reloadSections(newArr){
-        this.sections = newArr.slice();
-        // this.reIndex()
-    }
 
     reIndex(){
         for(let i = 0; i < this.sections.length; i++){

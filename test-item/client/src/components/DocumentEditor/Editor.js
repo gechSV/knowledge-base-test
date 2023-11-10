@@ -106,15 +106,12 @@ function Editor(){
     
 
     function deleteSection(index){
-        // console.log("deleteSection index", index);
         const bufArr = docState.slice();
         bufArr.splice(index, 1);
-        // console.log("test", test)
         setDocState(bufArr);
         documentEditorStore.reloadDocument(docState);
-        // documentEditorStore.deleteSectionsByIndex(index);
-        // setDocState(documentEditorStore.getDoc());
     }
+
     
     return (
         <div className='document-editor-container'> 

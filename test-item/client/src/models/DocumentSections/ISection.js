@@ -1,14 +1,15 @@
-export class Section{
+export class ISection{
     /**
      * Конструктор класса Section (Секция документа)
      * @param {index, type, state} vol : {index, type, state}
      */
     constructor(vol){
-        // Тндекс объекта в массиве, для поиска
+        // ID объекта в массиве, генерируется через shortid
         this.index = vol.index;
         // Тип блока документа  
         this.type = vol.type;
-        // Состояние компонента секции
+        // Состояние блока/секции
         this.state = vol.state;
     }
+    //TODO: sdfsafsadfsdfgdsg
 }
