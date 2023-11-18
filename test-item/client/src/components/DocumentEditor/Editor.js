@@ -106,11 +106,19 @@ function Editor(){
     
 
     function deleteSection(index){
+        const confirmBox = window.confirm(
+            "Вы действительно хотите удалить секцию документа?"); 
+        
+        if (confirmBox === false)
+            return;
+
         const bufArr = docState.slice();
         bufArr.splice(index, 1);
         setDocState(bufArr);
         documentEditorStore.reloadDocument(docState);
     }
+
+
 
     
     return (
